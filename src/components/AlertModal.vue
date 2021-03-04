@@ -3,13 +3,13 @@
     <transition name="modal">
       <div class="modal" @click.stop="closeModal" v-if="isActive">
         <div id="modalBox" @click.stop="blankEvent">
-          <div id="title" :style="modalColor"><slot name="title"></slot></div>
+          <div id="title" :style="titleColor"><slot name="title"></slot></div>
           <div id="body"><slot name="default"></slot></div>
           <div>
-            <button :style="modalColor" v-if="isModalActive" @click.stop="confirmModal">
+            <button :style="buttonTrueColor" v-if="isModalActive" @click.stop="confirmModal">
               <slot name="yesButton">OK</slot>
             </button>
-            <button :style="modalColor" v-if="isModalActive" @click.stop="closeModal">
+            <button :style="buttonFalseColor" v-if="isModalActive" @click.stop="closeModal">
               <slot name="cancelButton">CANCEL</slot>
             </button>
           </div>
@@ -21,8 +21,13 @@
 
 <script>
 export default {
-  props: ["isActive","color"],
-
+  props: { 
+    isActive : Boolean,
+    modalColor : String,
+    yesButtonColor : String,
+    noButtonColor : String,
+  },
+    
   methods: {
     closeModal() {
       this.$store.commit("modal/modalResponse", { response: false });
@@ -38,8 +43,15 @@ export default {
     isModalActive() {
       return this.isActive;
     },
-    modalColor(){
-      return "background:"+this.color;
+    titleColor(){
+      return `background:${this.modalColor};`;
+    },
+    buttonTrueColor(){
+      return `background: ${this.yesButtonColor};`;
+    },
+    buttonFalseColor(){
+
+      return `background: ${this.noButtonColor}`;
     }
   },
 };
@@ -98,10 +110,11 @@ button {
   margin: 0px 10px;
   border-radius: 4px;
   transition: background-color 1s;
+  padding:5px;
 }
 
 button:hover {
-  background: black;
+  opacity:0.7 !important;
 }
 
 /* add your chosen animations here */
@@ -118,11 +131,9 @@ button:hover {
 }
 .modal-leave-from {
   opacity: 1;
-  transform: translateY(0%) scale(1);
 }
 .modal-leave-to {
   opacity: 0;
-  transform: translateY(-100%) scale(0.3);
 } 
 .modal-leave-active {
   transition: all 0.2s ease-out;

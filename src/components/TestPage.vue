@@ -1,21 +1,26 @@
 <template>
 <div class="text-center">
 
-    <alert-modal :isActive="ModalOne" color="#000099">
+    <alert-modal 
+        :isActive="ModalOne" 
+        modalColor="#000099"
+        yesButtonColor = "green"
+        noButtonColor = "red"
+        >
         <template v-slot:title>This is Modal One</template>
         Put Some Text Here
         <template v-slot:yesButton>OK</template>
         <template v-slot:cancelButton>CANCEL</template>
     </alert-modal>
 
-    <alert-modal :isActive="ModalTwo" color="black">
+    <alert-modal :isActive="ModalTwo" modalColor="black">
         <template v-slot:title>This is Modal Two</template>
         Put Some Text Here
         <template v-slot:yesButton>YES</template>
         <template v-slot:cancelButton>NO</template>
     </alert-modal>
 
-    <alert-modal :isActive="ModalThree" color="green">
+    <alert-modal :isActive="ModalThree" modalColor="green">
         <template v-slot:title>This is Modal Three</template>
         Put Some Text Here
         <template v-slot:yesButton>GO AHEAD</template>

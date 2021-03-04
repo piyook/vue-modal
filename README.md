@@ -102,10 +102,10 @@ To use the components in any project follow the steps below
     app.component('alert-modal', AlertModal);
     ```
 
-2.  From the TestPage.vue copy the <alert-modal> html and add into the relevant component. 
+2.  From the TestPage.vue copy the alert-modal html and add into the relevant component. 
     This component is teleported to the document body in use. 
 
-    Use the TestPage.vue to extract the <alert-modal> component html which is regsitered globally.
+    Use the TestPage.vue to extract the alert-modal component html which is regsitered globally.
     Customise the modal text and give it a <b>unique identifier</b> for :isActive E.g <b>ModalOne</b>
     ```
     :isActive="ModalOne" 
@@ -116,8 +116,22 @@ To use the components in any project follow the steps below
     import {Modal} from '@/utils/modal';
     ```
 
-    Modal color can be passed usign the 'color' prop on the <alert-modal> component. Any color value can be passed
-    E.g 'red' or #ff0000
+    Modal title color can be passed usign the 'modalColor' prop on the <alert-modal> component. Button Colours can be customised with the yesButtonColor and noButtonColor props. Any color value can be passed as a string.
+    E.g 'red' or '#ff0000'
+
+    ```
+    <alert-modal 
+        :isActive="ModalOne" 
+        modalColor="#000099"
+        yesButtonColor = "green"
+        noButtonColor = "red"
+        >
+        <template v-slot:title>This is Modal One</template>
+        Put Some Text Here
+        <template v-slot:yesButton>OK</template>
+        <template v-slot:cancelButton>CANCEL</template>
+    </alert-modal>
+    ```
 
 
 3. Add a computed property that has the same name as the modal E.g modalOne
@@ -125,7 +139,7 @@ To use the components in any project follow the steps below
     ```
     computed:{
             ModalOne() {
-                    return this.$store.getters['modal/isModalVisible'] === 'modalOne' ? true : false;
+                    return this.$store.getters['modal/isModalVisible'] === 'ModalOne' ? true : false;
         },
     ```
 

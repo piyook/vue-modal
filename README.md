@@ -14,7 +14,7 @@
     <a href="https://github.com/piyook/vue-modal"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="#">View Demo</a>
+    <a href="https://piyook.github.io/vue-modal/">View Demo</a>
   </p>
 </p>
 
